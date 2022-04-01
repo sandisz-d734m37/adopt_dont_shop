@@ -19,7 +19,12 @@ class Shelter < ApplicationRecord
   def self.reverse_alpha
     Shelter.find_by_sql("SELECT name FROM shelters ORDER BY name desc")
   end
-  
+
+  def self.shelter_pending
+    shels = joins(pets: [{pet_applications: :application}] )
+    shels.where("applications.status = 'Pending'")
+  end
+
   def pet_count
     pets.count
   end
@@ -35,4 +40,5 @@ class Shelter < ApplicationRecord
   def shelter_pets_filtered_by_age(age_filter)
     adoptable_pets.where('age >= ?', age_filter)
   end
+
 end

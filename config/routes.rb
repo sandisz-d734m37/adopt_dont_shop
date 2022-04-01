@@ -37,8 +37,5 @@ Rails.application.routes.draw do
   get '/veterinary_offices/:veterinary_office_id/veterinarians/new', to: 'veterinarians#new'
   post '/veterinary_offices/:veterinary_office_id/veterinarians', to: 'veterinarians#create'
 
-  # namespace :admin do
-  #   resources :shelters
-  # end
   get '/admin/shelters', to: 'admin/shelters#index'
 end
