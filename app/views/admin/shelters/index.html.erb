@@ -1,0 +1,14 @@
+<h1> Your Shelters </h1>
+<div id="all_shelters">
+  <% @shelters.each do |shelter|%>
+    <p><a href="/admin/shelters/<%= shelter.id %>"><%= shelter.name %></a></p>
+  <% end %>
+</div>
+
+<div id="pending_shelters">
+  <h3> Shelter's with Pending Applications </h3>
+    <% @shels = Shelter.shelter_pending%>
+    <% @shels.each do |shel| %>
+      <p><a href="/admin/shelters/<%= shel.id %>"><%= shel.name %></a></p>
+    <% end %>
+</div>
