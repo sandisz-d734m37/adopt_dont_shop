@@ -81,8 +81,10 @@ describe 'admin shelter index page' do
   end
 
   it 'has links to shelter show pages' do
-    click_link(@shelter_1.name)
+    within '#all_shelters' do
+      click_link(@shelter_1.name)
 
-    expect(current_path).to eq("/admin/shelters/#{@shelter_1.id}")
+      expect(current_path).to eq("/admin/shelters/#{@shelter_1.id}")
+    end
   end
 end
