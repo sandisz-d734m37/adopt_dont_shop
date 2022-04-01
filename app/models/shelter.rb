@@ -25,7 +25,7 @@ class Shelter < ApplicationRecord
   def self.shelter_pending
     # binding.pry
     shels = joins(:applications)
-    shels.where("applications.status = 'Pending'")
+    shels.where("applications.status = 'Pending'").order(:name)
   end
 
   def pet_count
