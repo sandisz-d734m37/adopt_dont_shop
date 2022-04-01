@@ -79,4 +79,10 @@ describe 'admin shelter index page' do
       expect(page).not_to have_content(@shelter_3.name)
     end
   end
+
+  it 'has links to shelter show pages' do
+    click_link(@shelter_1.name)
+
+    expect(current_path).to eq("/admin/shelters/#{@shelter_1.id}")
+  end
 end
