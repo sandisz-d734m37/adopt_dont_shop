@@ -49,4 +49,10 @@ describe 'admin shelter index page' do
       expect(page).to have_content("Number of adoptable pets: 2")
     end
   end
+
+  it 'shows the average age of all adoptable pets' do
+    within '#statistics' do
+      expect(page).to have_content("Average adoptable pets age: 4")
+    end
+  end
 end
