@@ -1,0 +1,3 @@
+<% @applications.each do |appl| %>
+  <a href="/admin/applications/<%= appl.id %>"> <%= appl.name %><%= appl.id %></a></br></br>
+<% end %>
