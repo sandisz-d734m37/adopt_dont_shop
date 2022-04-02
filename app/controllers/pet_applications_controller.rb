@@ -12,8 +12,11 @@ class PetApplicationsController < ApplicationController
     application_with_pets = Application.pets_in_application(params[:id])
     application = Application.find(params[:id])
     if application_with_pets.all?{ |appl| appl.pet_app_status == true }
-        application.status = "Approved"
-        application.save
+      application.status = "Approved"
+      application.save
+    elsif application_with_pets.any?{ |appl| appl.pet_app_status == false }
+      application.status = "Rejected"
+      application.save
     end
 
     redirect_to "/admin/applications/#{params[:id]}"
