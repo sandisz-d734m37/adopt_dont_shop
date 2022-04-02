@@ -100,6 +100,26 @@ describe 'Admin Appliction Show Page' do
     end
   end
 
-  
+  it 'will show approval message if approved, rejection if rejected' do
+    visit "/admin/applications/#{@appl_2.id}"
+
+    within("#pet-#{@moody.id}") do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+      click_button "Approve"
+      expect(page).to have_content("Pet has been approved!")
+      expect(page).not_to have_button("Reject")
+      expect(page).not_to have_button("Approve")
+    end
+
+    within("#pet-#{@lucille.id}") do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+      click_button "Reject"
+      expect(page).to have_content("Pet has been denied :(")
+      expect(page).not_to have_button("Reject")
+      expect(page).not_to have_button("Approve")
+    end
+  end
 
 end
