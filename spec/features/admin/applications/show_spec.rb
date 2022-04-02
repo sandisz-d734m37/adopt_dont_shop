@@ -23,8 +23,8 @@ describe 'Admin Appliction Show Page' do
       status: 'Pending'
     )
     @appl_2 = Application.create!(
-      name: 'Johnny',
-      street_address: '123 nowhere',
+      name: 'Braunny',
+      street_address: '654 Heretherehere',
       city: 'HereTown',
       state: 'TH',
       zip_code: 99999,
@@ -69,5 +69,26 @@ describe 'Admin Appliction Show Page' do
     expect(page).to have_content(@appl_2.zip_code)
     expect(page).to have_content(@appl_2.description)
     expect(page).to have_content(@appl_2.status)
+
+    expect(page).not_to have_content(@appl_1.name)
+    expect(page).not_to have_content(@appl_1.street_address)
+  end
+
+  it 'displays a list of pets being applied for' do
+    visit "/admin/applications/#{@appl_2.id}"
+
+    within("#pet-#{@moody.id}") do
+      expect(page).to have_content(@moody.name)
+      expect(page).to have_content(@moody.breed)
+      expect(page).to have_content(@moody.age)
+    end
+
+    within("#pet-#{@lucille.id}") do
+      expect(page).to have_content(@lucille.name)
+      expect(page).to have_content(@lucille.breed)
+      expect(page).to have_content(@lucille.age)
+    end
+
+    expect(page).not_to have_content(@pirate.name)
   end
 end
