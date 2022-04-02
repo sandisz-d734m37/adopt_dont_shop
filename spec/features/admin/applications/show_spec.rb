@@ -168,4 +168,28 @@ describe 'Admin Appliction Show Page' do
     # expect(@appl_2.status).to eq("Approved")
   end
 
+  it 'will mark the application as rejected if any pets are rejected' do
+    visit "/admin/applications/#{@appl_2.id}"
+
+    expect(page).to have_content("Appliction status:Pending")
+
+    within("#pet-#{@moody.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+
+    expect(page).to have_content("Appliction status:Pending")
+
+    within("#pet-#{@lucille.id}") do
+      click_button "Reject"
+
+      expect(page).to have_content("Pet has been denied :(")
+    end
+
+    expect(page).to have_content("Appliction status:Rejected")
+    # expect(@appl_2.status).to eq("Pending")
+    # expect(@appl_2.status).to eq("Approved")
+  end
+
 end
