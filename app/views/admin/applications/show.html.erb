@@ -8,10 +8,12 @@
 <p><strong>description:</strong><%= @application.description %></p><hr/>
 <h3>Pets being applied for:</h3>
 <% @application.pets.each do |pet| %>
-  <h4>Name: <%= pet.name %> </h4>
-  <p><strong>Breed:</strong><%= pet.breed %></p>
-  <p><strong>Age:</strong><%= pet.age %></p>
-  <br/>
+  <div id="pet-<%= pet.id %>">
+    <h4>Name: <%= pet.name %> </h4>
+    <p><strong>Breed:</strong><%= pet.breed %></p>
+    <p><strong>Age:</strong><%= pet.age %></p>
+    <br/>
+  </div>
 <% end %>
 <hr/>
 <h2><strong>Appliction status:</strong><%= @application.status %></h2>
