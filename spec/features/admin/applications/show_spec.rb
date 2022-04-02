@@ -91,4 +91,15 @@ describe 'Admin Appliction Show Page' do
 
     expect(page).not_to have_content(@pirate.name)
   end
+
+  it 'has buttons to reject or approve pets' do
+    visit "/admin/applications/#{@appl_2.id}"
+    within("#pet-#{@moody.id}") do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+    end
+  end
+
+  
+
 end
