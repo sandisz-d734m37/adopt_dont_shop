@@ -22,10 +22,17 @@ class Pet < ApplicationRecord
     .joins(:applications)
     .where("applications.id = #{app_id}")
   end
+
   def self.find_pet_in_application(app_id)
     select("pets.*")
     .joins(:applications)
     .where("applications.id = #{app_id}")
+  end
+
+  def self.find_pending_applications(shelter_id)
+     select('pets.name, applications.id')
+     .joins(:shelter, :applications)
+     .where("shelters.id = #{shelter_id} AND applications.status != 'Approved' AND applications.status != 'Rejected'")
   end
 
 
