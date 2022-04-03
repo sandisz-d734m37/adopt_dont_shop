@@ -43,4 +43,12 @@ class Shelter < ApplicationRecord
     adoptable_pets.where('age >= ?', age_filter)
   end
 
+  def adoptable_pet_count
+    adoptable_pets.count
+  end
+
+  def avg_pet_age
+    adoptable_pets.average(:age).to_f
+  end
+
 end

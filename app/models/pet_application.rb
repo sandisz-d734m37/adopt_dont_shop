@@ -2,7 +2,12 @@ class PetApplication < ApplicationRecord
   belongs_to :pet
   belongs_to :application
 
+
+  validates :pet_id, presence: true
+  validates :application_id, presence: true
+
   def show
     @pet_application = PetApplication.find(params[:id])
   end
+
 end

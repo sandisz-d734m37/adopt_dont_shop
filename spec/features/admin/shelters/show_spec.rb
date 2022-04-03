@@ -8,6 +8,7 @@ describe 'admin shelter index page' do
 
     @pirate = @shelter_1.pets.create!(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
     @clawdia = @shelter_1.pets.create!(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
+    @hariett = @shelter_1.pets.create!(name: 'Hariett', breed: 'Cat', age: 10, adoptable: false)
     @lucille = @shelter_3.pets.create!(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
 
     @appl_1 = Application.create!(
@@ -40,5 +41,18 @@ describe 'admin shelter index page' do
     expect(page).to have_content(@shelter_1.city)
     expect(page).not_to have_content(@shelter_2.name)
     expect(page).not_to have_content(@shelter_2.city)
+  end
+
+  it 'shows the number of adoptable pets in the shelter' do
+    within '#statistics' do
+      expect(page).to have_content("#{@shelter_1.name} statistics:")
+      expect(page).to have_content("Number of adoptable pets: 2")
+    end
+  end
+
+  it 'shows the average age of all adoptable pets' do
+    within '#statistics' do
+      expect(page).to have_content("Average adoptable pets age: 4.0")
+    end
   end
 end
