@@ -15,7 +15,7 @@
   <h2>Action Required</h2>
   <h4>Pets with pending applications:</h4>
   <% Pet.find_pending_applications(@shelter.id).each do |appl| %>
-    <a href="/admin/applications/<%= appl.id %>"><strong><%= appl.name %></strong></a>
+    <a href="/admin/applications/<%= appl.id %>"><strong><%= appl.name %></strong></a><br/>
   <% end %>
 
 </div>

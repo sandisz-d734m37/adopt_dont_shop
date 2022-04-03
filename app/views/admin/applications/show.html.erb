@@ -23,7 +23,7 @@
           <%= form.submit "Reject" %>
         <% end %>
 
-      <% elsif pet.adoptable == false && @application.status != "Approved" %>
+      <% elsif pet.adoptable == false && @application.status != "Approved" && pet_app.pet_app_status != false %>
 
         <p><strong> This pet has already been approved for adoption </strong></p>
 
