@@ -192,4 +192,40 @@ describe 'Admin Appliction Show Page' do
     # expect(@appl_2.status).to eq("Approved")
   end
 
+  it 'makes pet unadoptable if they are included in any approved applications' do
+    visit "/pets/#{@moody.id}"
+    expect(page).to have_content("Adoptable: true")
+    # expect(@moody.adoptable).to be(true)
+    visit "/pets/#{@lucille.id}"
+    expect(page).to have_content("Adoptable: true")
+    # expect(@lucille.adoptable).to be(true)
+
+    visit "/admin/applications/#{@appl_2.id}"
+
+    expect(@moody.adoptable).to be(true)
+    expect(@lucille.adoptable).to be(true)
+
+    within("#pet-#{@moody.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+    expect(@moody.adoptable).to be(true)
+    expect(@lucille.adoptable).to be(true)
+
+    expect(page).to have_content("Appliction status:Pending")
+
+    within("#pet-#{@lucille.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+    visit "/pets/#{@moody.id}"
+    expect(page).to have_content("Adoptable: false")
+    # expect(@moody.adoptable).to be(false)
+    visit "/pets/#{@lucille.id}"
+    expect(page).to have_content("Adoptable: false")
+    # expect(@lucille.adoptable).to be(false)
+  end
+
 end
