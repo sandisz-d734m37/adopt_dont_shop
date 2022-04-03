@@ -19,6 +19,15 @@ class PetApplicationsController < ApplicationController
       application.save
     end
 
+    pet_in_app = Pet.find_application(params[:id])
+    pets = Pet.find_pet_in_application(params[:id])
+    if pet_in_app.any?{ |pet_ap| pet_ap.status == "Approved"}
+      pets.each do |pet|
+        pet.adoptable = false
+        pet.save
+      end
+    end
+
     redirect_to "/admin/applications/#{params[:id]}"
   end
 
