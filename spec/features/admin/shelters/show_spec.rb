@@ -20,6 +20,15 @@ describe 'admin shelter index page' do
       description: 'Awaiting Information...',
       status: 'Approved'
     )
+    @appl_3 = Application.create!(
+      name: 'Buddy',
+      street_address: '21342 nowhere',
+      city: 'AjgfjTown',
+      state: 'IUFH',
+      zip_code: 99999,
+      description: 'Awaiting Information...',
+      status: 'Pending'
+    )
     @appl_2 = Application.create!(
       name: 'Johnny',
       street_address: '123 nowhere',
@@ -31,6 +40,7 @@ describe 'admin shelter index page' do
     )
 
     PetApplication.create!(pet_id: @pirate.id, application_id: @appl_1.id, pet_app_status: true)
+    PetApplication.create!(pet_id: @hariett.id, application_id: @appl_3.id)
     PetApplication.create!(pet_id: @lucille.id, application_id: @appl_2.id)
 
     visit "/admin/shelters/#{@shelter_1.id}"
@@ -59,6 +69,14 @@ describe 'admin shelter index page' do
   it 'shows the number of pets that have been adopted' do
     within '#statistics' do
       expect(page).to have_content("Adopted pets: 1")
+    end
+  end
+
+  it 'has an action required section' do
+    within '#action_required' do
+      expect(page).to have_content("Pets with pending applications:")
+      expect(page).to have_content("Hariett")
+      expect(page).not_to have_content("Mr. Pirate")
     end
   end
 end
