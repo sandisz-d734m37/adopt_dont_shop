@@ -79,4 +79,27 @@ describe 'admin shelter index page' do
       expect(page).not_to have_content("Mr. Pirate")
     end
   end
+
+  it 'routes correctly and empties action required when action is not required' do
+    within '#action_required' do
+      expect(page).to have_content("Hariett")
+      expect(page).not_to have_content("Mr. Pirate")
+
+      click_link("Hariett")
+    end
+
+    expect(current_path).to eq("/admin/applications/#{@appl_3.id}")
+
+    within "#pet-#{@hariett.id}" do
+      click_button("Approve")
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+
+    visit "/admin/shelters/#{@shelter_1.id}"
+
+    within '#action_required' do
+      expect(page).not_to have_content("Hariett")
+    end
+  end
 end
