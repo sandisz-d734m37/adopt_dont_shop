@@ -11,9 +11,12 @@ class Application < ApplicationRecord
   has_many :pets, through: :pet_applications
   has_many :shelters, through: :pets
 
+
   def self.pets_in_application(appl_id)
     joins(:pet_applications).where("pet_applications.application_id = ?", appl_id)
   end
+
+
 
 
 end
