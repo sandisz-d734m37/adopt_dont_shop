@@ -130,7 +130,7 @@ describe 'Admin Appliction Show Page' do
       expect(page).to have_button("Reject")
 
       click_button "Approve"
-      
+
       expect(page).to have_content("Pet has been approved!")
       expect(page).not_to have_button("Reject")
       expect(page).not_to have_button("Approve")
@@ -141,6 +141,117 @@ describe 'Admin Appliction Show Page' do
     within("#pet-#{@moody.id}") do
       expect(page).to have_button("Approve")
       expect(page).to have_button("Reject")
+    end
+  end
+
+  it 'will mark the application as approved if all pets are approved' do
+    visit "/admin/applications/#{@appl_2.id}"
+
+    expect(page).to have_content("Appliction status:Pending")
+
+    within("#pet-#{@moody.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+
+    expect(page).to have_content("Appliction status:Pending")
+
+    within("#pet-#{@lucille.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+
+    expect(page).to have_content("Appliction status:Approved")
+    # expect(@appl_2.status).to eq("Pending")
+    # expect(@appl_2.status).to eq("Approved")
+  end
+
+  it 'will mark the application as rejected if any pets are rejected' do
+    visit "/admin/applications/#{@appl_2.id}"
+
+    expect(page).to have_content("Appliction status:Pending")
+
+    within("#pet-#{@moody.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+
+    expect(page).to have_content("Appliction status:Pending")
+
+    within("#pet-#{@lucille.id}") do
+      click_button "Reject"
+
+      expect(page).to have_content("Pet has been denied :(")
+    end
+
+    expect(page).to have_content("Appliction status:Rejected")
+    # expect(@appl_2.status).to eq("Pending")
+    # expect(@appl_2.status).to eq("Rejected")
+  end
+
+  it 'makes pet unadoptable if they are included in any approved applications' do
+    visit "/pets/#{@moody.id}"
+    expect(page).to have_content("Adoptable: true")
+    visit "/pets/#{@lucille.id}"
+    expect(page).to have_content("Adoptable: true")
+
+    visit "/admin/applications/#{@appl_2.id}"
+
+    within("#pet-#{@moody.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+    expect(@moody.adoptable).to be(true)
+    expect(@lucille.adoptable).to be(true)
+
+    within("#pet-#{@lucille.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+    visit "/pets/#{@moody.id}"
+    expect(page).to have_content("Adoptable: false")
+    # expect(@moody.adoptable).to be(false)
+    visit "/pets/#{@lucille.id}"
+    expect(page).to have_content("Adoptable: false")
+    # expect(@lucille.adoptable).to be(false)
+  end
+
+  it 'displays unadoptability message on other pending applications for the same pet' do
+    visit "/admin/applications/#{@appl_3.id}"
+
+    within("#pet-#{@moody.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+
+    visit "/admin/applications/#{@appl_2.id}"
+
+    within("#pet-#{@moody.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+
+    within("#pet-#{@lucille.id}") do
+      click_button "Approve"
+
+      expect(page).to have_content("Pet has been approved!")
+    end
+
+    expect(page).to have_content("Appliction status:Approved")
+
+    visit "/admin/applications/#{@appl_3.id}"
+
+    within("#pet-#{@moody.id}") do
+      expect(page).to have_content("This pet has already been approved for adoption")
+      expect(page).to have_button("Reject")
+      expect(page).not_to have_button("Approve")
     end
   end
 

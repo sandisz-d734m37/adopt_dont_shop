@@ -15,15 +15,31 @@
         <p><strong>Breed:</strong><%= pet.breed %></p>
         <p><strong>Age:</strong><%= pet.age %></p>
         <br/>
-      <% if pet_app.pet_app_status == nil %>
+
+      <% if pet_app.pet_app_status == nil && pet.adoptable == true %>
+
         <%= form_with url:"/admin/applications/#{@application.id}?pet_id=#{pet.id}", method: :patch, local: true do |form| %>
           <%= form.submit "Approve" %>
           <%= form.submit "Reject" %>
         <% end %>
+
+      <% elsif pet.adoptable == false && @application.status != "Approved" && pet_app.pet_app_status != false %>
+
+        <p><strong> This pet has already been approved for adoption </strong></p>
+
+        <%= form_with url:"/admin/applications/#{@application.id}?pet_id=#{pet.id}", method: :patch, local: true do |form| %>
+        <%= form.submit "Reject" %>
+        <% end %>
+
       <% elsif pet_app.pet_app_status == true %>
+
         <p> Pet has been approved! </p>
+
       <% elsif pet_app.pet_app_status == false %>
+
         <p> Pet has been denied :( </p>
+
+
       <% end %>
     </div>
   <% end %>

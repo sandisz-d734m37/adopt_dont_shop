@@ -51,4 +51,15 @@ class Shelter < ApplicationRecord
     adoptable_pets.average(:age).to_f
   end
 
+  def adopted_pet_count
+    adopted = pets.where(adoptable: false)
+    adopted.count
+  end
+
+  # def self.find_pending_applications(shelter_id)
+  #    select('pets.*, applications.id, shelters.id')
+  #    .joins(:pets, :applications)
+  #    .where("shelters.id = #{shelter_id} AND applications.status != 'Approved' AND applications.status != 'Rejected'")
+  # end
+
 end

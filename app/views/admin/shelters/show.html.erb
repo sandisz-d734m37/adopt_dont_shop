@@ -6,4 +6,16 @@
   <h3><%= @shelter.name %> statistics:</h3><br/>
   <p><strong>Number of adoptable pets:</strong> <%= @shelter.adoptable_pet_count %> </p>
   <p><strong>Average adoptable pets age:</strong> <%= @shelter.avg_pet_age %> </p>
+  <p><strong>Adopted pets:</strong> <%= @shelter.adopted_pet_count %> </p>
+</div>
+
+<hr/>
+
+<div id="action_required">
+  <h2>Action Required</h2>
+  <h4>Pets with pending applications:</h4>
+  <% Pet.find_pending_applications(@shelter.id).each do |appl| %>
+    <a href="/admin/applications/<%= appl.id %>"><strong><%= appl.name %></strong></a><br/>
+  <% end %>
+
 </div>
