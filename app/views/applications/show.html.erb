@@ -13,17 +13,25 @@
 
 
 <% if @application.status == "In progress" %>
-<%= "Add a Pet to this Application" %>
-<%= form_with url: "/applications/#{@application.id}?search=#{params[:pet_name]}", method: :get, local: true do |f| %>
-<%= f.label :query, "Pet name" %>
-<%= f.text_field :query, name: :pet_name %>
-<%= f.submit "Search" %><br>
+  <%= "Add a Pet to this Application" %>
+  <%= form_with url: "/applications/#{@application.id}?search=#{params[:pet_name]}", method: :get, local: true do |f| %>
+  <%= f.label :query, "Pet name" %>
+  <%= f.text_field :query, name: :pet_name %>
+  <%= f.submit "Search" %><br>
 <% end %>
 
 <% if @pet.present? %>
-
   <%= @pet.name %>
   <%= button_to "Adopt this Pet", "/pet_applications/new", method: :post, params: {:application_id => @application.id, :pet_id => @pet.id} %>
+<% end %>
+<% end %>
 
-  <% end %>
+<% if @selected_pets.length > 0 && @application.description == "Awaiting information" %>
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
+  <p>Why I would be a good pet owner</p>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.submit "Submit my application" %>
+<% end %>
+
 <% end %>
