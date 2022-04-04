@@ -55,3 +55,5 @@ pet_application_3 = PetApplication.create!(pet_id: rick_owens.id, application_id
 pet_application_4 = PetApplication.create!(pet_id: rick_owens.id, application_id: application_3.id)
 
 pet_application_5 = PetApplication.create!(pet_id: olive.id, application_id: application_4.id)
+
+pet_application_6 = PetApplication.create!(pet_id: grumpy.id, application_id: application_4.id)
