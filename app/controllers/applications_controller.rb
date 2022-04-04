@@ -28,7 +28,7 @@ class ApplicationsController < ApplicationController
     end
 
     @selected_pets = @application.pets
-    if params[:description]
+    if params[:description] && @application.status != "Approved" && @application.status != "Rejected"
       @application.update({description: params[:description]})
       @application.update_status
       @application.save
