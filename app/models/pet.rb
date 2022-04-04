@@ -13,6 +13,10 @@ class Pet < ApplicationRecord
     where(adoptable: true)
   end
 
+  def self.search_by_name(input)
+    find_by(name: "#{input}")
+  end 
+
   def pet_app(pet_id, app_id)
     PetApplication.where("pet_id = #{pet_id} AND application_id = #{app_id}").first
   end
@@ -34,6 +38,4 @@ class Pet < ApplicationRecord
      .joins(:shelter, :applications)
      .where("shelters.id = #{shelter_id} AND applications.status != 'Approved' AND applications.status != 'Rejected'")
   end
-
-
 end

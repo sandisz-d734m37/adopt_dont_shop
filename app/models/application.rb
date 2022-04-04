@@ -7,6 +7,9 @@ class Application < ApplicationRecord
   validates :description, presence: true
   validates :status, presence: true
 
+  attribute :description, :string, default: ""
+  attribute :status, :string, default: "In progress"
+
   has_many :pet_applications
   has_many :pets, through: :pet_applications
   has_many :shelters, through: :pets
@@ -20,5 +23,12 @@ class Application < ApplicationRecord
 
 
 
+  def update_status
+    if description == "" || pets.empty?
+      update({status: 'In progress'})
+    elsif description.length > 1 && !pets.empty?
+      update({status: 'Pending'})
+    end 
+  end
 
 end
