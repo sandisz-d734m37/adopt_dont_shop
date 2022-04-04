@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   get '/applications/new', to: 'applications#new'
   get '/applications/:id', to: 'applications#show'
-  post '/applications/:id', to: 'applications#create'
+  post '/applications/', to: 'applications#create'
   get '/applications/:id/edit', to: 'applications#edit'
   patch '/applications/:id', to: 'applications#update'
   delete '/applications/:id', to: 'applications#destroy'
