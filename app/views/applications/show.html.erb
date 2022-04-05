@@ -23,11 +23,7 @@
 <% end %>
 
 <% if @selected_pets.length > 0 && @application.description == "Awaiting information" %>
-  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
-  <p>Why I would be a good pet owner</p>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  <%= f.submit "Submit my application" %>
-<% end %>
+<%= render "applications/description_field" %>
+  
 
 <% end %>
