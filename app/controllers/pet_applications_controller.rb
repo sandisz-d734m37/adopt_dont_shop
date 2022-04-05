@@ -26,25 +26,12 @@ def create
 
     petappl.save
 
-    application_with_pets = Application.pets_in_application(params[:id])
     application = Application.find(params[:id])
-    if application_with_pets.all?{ |appl| appl.pet_app_status == true }
-      application.status = "Approved"
-      application.save
-    elsif application_with_pets.any?{ |appl| appl.pet_app_status == false }
-      application.status = "Rejected"
-      application.save
-    end
-
-    pet_in_app = Pet.find_application(params[:id])
-    pets = Pet.find_pet_in_application(params[:id])
-    if pet_in_app.any?{ |pet_ap| pet_ap.status == "Approved"}
+    application.approval
+    pets = Pet.find_approved_applications(params[:id])
       pets.each do |pet|
-        pet.adoptable = false
-        pet.save
+        pet.update_adoptability
       end
-    end
-
     redirect_to "/admin/applications/#{params[:id]}"
   end
 

@@ -45,8 +45,17 @@ RSpec.describe 'application creation' do
     context 'given invalid data' do
       it 're-renders the new form' do
         visit "/applications/new"
+        # fill_in 'Name', with: "Silly Name"
         click_button 'Submit'
-        expect(page).to have_current_path("/applications/new")
+        expect(page).to have_content("New Application:")
+        expect(find('form')).to have_content('Name')
+        expect(find('form')).to have_content('Street address')
+        expect(find('form')).to have_content('City')
+        expect(find('form')).to have_content('State')
+        expect(find('form')).to have_content('Zip code')
+        expect(find('form')).to have_content('Description')
+        expect(find('form')).to have_content('Status')
+        expect(find('form')).to have_button('Submit')
         expect(page).to have_content("Error: Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip code can't be blank, Zip code is not a number")
       end
     end
