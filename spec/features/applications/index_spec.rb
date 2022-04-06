@@ -18,7 +18,7 @@ describe 'Admin Application Index page' do
       zip_code: 23229,
       state: "AUS",
       description: "I love dolls",
-      status: "Pending")
+      status: "In progress")
 
     PetApplication.create!(
       pet_id: @pet_2.id,
@@ -26,6 +26,15 @@ describe 'Admin Application Index page' do
     )
 
     @application_2 = Application.create!(
+      name: "Sharky Shark",
+      street_address: "678 Wallaby Way",
+      city: "Sydney",
+      zip_code: 23229,
+      state: "AUS",
+      description: "I love dolls",
+      status: "In progress")
+
+    @application_3 = Application.create!(
       name: "Sharky Shark",
       street_address: "678 Wallaby Way",
       city: "Sydney",
@@ -40,10 +49,11 @@ describe 'Admin Application Index page' do
     )
   end
 
-  it 'displays all applications and their IDs' do
+  it 'displays all in-progress applications and their IDs' do
     visit '/applications'
 
     expect(page).to have_content("#{@application_1.name} #{@application_1.id}")
     expect(page).to have_content("#{@application_2.name} #{@application_2.id}")
+    expect(page).not_to have_content("#{@application_3.name} #{@application_3.id}")
   end
 end

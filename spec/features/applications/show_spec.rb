@@ -91,7 +91,7 @@ RSpec.describe 'the application show page' do
 
     click_button "Adopt this Pet"
     expect(current_path).to eq("/applications/#{application_4.id}")
-    expect(page).to have_content("Pets: #{olive.name} #{ozzy.name}")
+    expect(page).to have_content("Pets: | #{olive.name} | #{ozzy.name} |")
   end
 
   it 'After user adds pet(s) user sees a section to submit application' do

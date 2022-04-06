@@ -1,13 +1,22 @@
-<h1>Application #<%= @application.id %></h1><hr/>
+<div class="application_container">
+  <h1>Application #<%= @application.id %></h1><hr/>
 
-<h2><strong>Name:</strong><%= @application.name %></h2>
-<p><strong>Street address:</strong><%= @application.street_address %></p>
-<p><strong>City:</strong><%= @application.city %></p>
-<p><strong>State:</strong><%= @application.state %></p>
-<p><strong>zip_code:</strong><%= @application.zip_code %></p>
-<p><strong>description:</strong><%= @application.description %></p><hr/>
+  <div class="appl_information">
+    <h2><strong>Name:</strong><%= @application.name %></h2>
+    <p><strong>Street address:</strong><%= @application.street_address %></p>
+    <p><strong>City:</strong><%= @application.city %></p>
+    <p><strong>State:</strong><%= @application.state %></p>
+    <p><strong>zip_code:</strong><%= @application.zip_code %></p>
+    <p><strong>description:</strong><%= @application.description %></p>
+  </div><hr/>
 
-<%= render "/admin/applications/pets_in_application" %>
-<hr/>
+  <div class="appl_pets">
+    <%= render "/admin/applications/pets_in_application" %>
+  </div>
 
-<h2><strong>Appliction status:</strong><%= @application.status %></h2>
+  <hr/>
+
+  <h2 class="appl_status">
+    <strong>Appliction status:</strong><%= @application.status %>
+  </h2>
+</div>

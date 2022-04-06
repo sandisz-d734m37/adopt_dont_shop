@@ -1,29 +1,36 @@
+<div class="application_container">
+  <h1>Application For:</h1>
+  <div class="appl_information">
+    <h3>Name : <%= @application.name %></h3>
+    <p>Street Address : <%= @application.street_address %></p>
+    <p>City : <%= @application.city %></p>
+    <p>State : <%= @application.state %></p>
+    <p>Zip Code : <%= @application.zip_code %></p>
+    <p>Status : <%= @application.status %></p>
+    <p>Description: <%= @application.description %></p>
+    <br/>
+    <p>Pets:<br/><% @application.pets.each do |pet| %>
+      | <%= link_to pet.name, "/pets/#{pet.id}", method: :get %>
+    <% end %>|</p>
+  </div>
+  <div class="appl_submission">
+    <% if @application.status == "In progress" %>
+      <br/><hr/><br/><br/>
 
-<h1>Application For:</h1>
-<h3>Name : <%= @application.name %></h3>
-<p>Street Address : <%= @application.street_address %></p>
-<p>City : <%= @application.city %></p>
-<p>State : <%= @application.state %></p>
-<p>Zip Code : <%= @application.zip_code %></p>
-<p>Status : <%= @application.status %></p>
-<p>Description: <%= @application.description %></p>
-<p>Pets:<% @application.pets.each do |pet| %>
-  <%= link_to pet.name, "/pets/#{pet.id}", method: :get %><br>
-<% end %></p>
+      <%= render "/applications/pet_search_bar" %>
 
+      <% if @pet.present? %>
+        <%= @pet.name %>
+        <%= button_to "Adopt this Pet", "/pet_applications/new", method: :post, params: {:application_id => @application.id, :pet_id => @pet.id} %>
+      <% end %>
+       <br/>
+    <% end %>
 
-<% if @application.status == "In progress" %>
-  <%= render "/applications/pet_search_bar" %>
+    <% if @selected_pets.length > 0 && @application.description == "Awaiting information" %>
+      <br/><hr/><br/>
 
+      <%= render "applications/description_field" %>
 
-<% if @pet.present? %>
-  <%= @pet.name %>
-  <%= button_to "Adopt this Pet", "/pet_applications/new", method: :post, params: {:application_id => @application.id, :pet_id => @pet.id} %>
-<% end %>
-<% end %>
-
-<% if @selected_pets.length > 0 && @application.description == "Awaiting information" %>
-<%= render "applications/description_field" %>
-  
-
-<% end %>
+    <% end %>
+  </div>
+</div>
