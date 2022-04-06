@@ -41,13 +41,6 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
-  def update
-    @application = Application.find(params[:id])
-    if @application.update(application_params)
-      redirect_to "applications/#{@application.id}"
-    end
-  end
-
   private
 
   def application_params

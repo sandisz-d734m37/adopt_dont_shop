@@ -121,4 +121,22 @@ RSpec.describe 'the application show page' do
     expect(page).to_not have_button("Search")
     expect(page).to_not have_button("Submit my application")
   end
+
+  it 'Before user adds pet(s), user cannot submit application' do
+    furry_friends = Shelter.create!(name: "Furry Friends", foster_program: true, city: "Denver", rank: "2")
+
+    ozzy = furry_friends.pets.create!(name: "Ozzy", age: 1, breed: "dog", adoptable: true)
+
+    application_4 = Application.create!(name: "Marky Mark", street_address: "678 I Way", city: "Richmond", zip_code: 23229, state: "VA", description: "Awaiting information", status: "In progress")
+
+    visit "/applications/#{application_4.id}"
+
+    fill_in('Pet name', with: "#{ozzy.name}")
+    click_button "Search"
+    click_button "Adopt this Pet"
+
+    click_button "Submit my application"
+    expect(page).to_not have_content("Status : Pending")
+    expect(page).to have_content("Status : In progress")
+  end
 end
