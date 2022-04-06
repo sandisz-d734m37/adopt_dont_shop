@@ -23,7 +23,7 @@ class ApplicationsController < ApplicationController
   def show
     if params[:pet_name].present?
       @application = Application.find(params[:id])
-      @pet = Pet.search_by_name(params[:pet_name])
+      @pet = Pet.search(params[:pet_name])
     else
       @application = Application.find(params[:id])
     end
@@ -39,13 +39,6 @@ class ApplicationsController < ApplicationController
 
   def edit
     @application = Application.find(params[:id])
-  end
-
-  def update
-    @application = Application.find(params[:id])
-    if @application.update(application_params)
-      redirect_to "applications/#{@application.id}"
-    end
   end
 
   private

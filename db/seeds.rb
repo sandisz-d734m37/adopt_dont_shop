@@ -34,15 +34,51 @@ bobby = farm_animals.pets.create!(name: "Bobby", age: 5, breed: "cow", adoptable
 
 grumpy = farm_animals.pets.create!(name: "Grumpy", age: 2, breed: "goat", adoptable: true)
 
-application_1 = Application.create!(name: "Hiroko Matsushita", street_address: "123 I Way", city: "Richmond", zip_code: 23229, state: "VA", description: "Awaiting Information", status: "In progress")
+application_1 = Application.create!(
+  name: "Hiroko Matsushita",
+  street_address: "123 I Way",
+  city: "Richmond",
+  zip_code: 23229,
+  state: "VA",
+  description: "Awaiting information",
+  status: "In progress")
 
+application_2 = Application.create!(
+  name: "Mihara Yasuhiro",
+  street_address: "234 I Way",
+  city: "Richmond",
+  zip_code: 23229,
+  state: "VA",
+  description: "Awaiting information",
+  status: "In progress")
 
-application_2 = Application.create!(name: "Mihara Yasuhiro", street_address: "234 I Way", city: "Richmond", zip_code: 23229, state: "VA", description: "Awaiting Information", status: "In progress")
+application_3 = Application.create!(
+  name: "Steve Jobs",
+  street_address: "456 I Way",
+  city: "Richmond",
+  zip_code: 23229,
+  state: "VA",
+  description: "I love rick owens <3",
+  status: "Pending")
 
-application_3 = Application.create!(name: "Steve Jobs", street_address: "456 I Way", city: "Richmond", zip_code: 23229, state: "VA", description: "Awaiting Information", status: "In progress")
+application_4 = Application.create!(
+  name: "Marky Mark",
+  street_address: "678 I Way",
+  city: "Richmond",
+  zip_code: 23229,
+  state: "VA",
+  description: "I would be a great dog owner!",
+  status: "Pending")
 
+application_5 = Application.create!(
+  name: "James Jebbia",
+  street_address: "123 No Way",
+  city: "Reno",
+  zip_code: 23229,
+  state: "NV",
+  description: "Awaiting information",
+  status: "In progress")
 
-application_4 = Application.create!(name: "Marky Mark", street_address: "678 I Way", city: "Richmond", zip_code: 23229, state: "VA", description: "Awaiting Information", status: "In progress")
 
 
 

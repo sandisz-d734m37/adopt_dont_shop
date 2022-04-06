@@ -1,4 +1,12 @@
-<h3>All Applications</h3>
-<% @applications.each do |appl| %>
-  <a href="/applications/<%= appl.id %>"> <%= appl.name %><%= appl.id %></a></br></br>
-<% end %>
+<div class="application_container">
+  <h3>Applications in Progress</h3>
+  <% @applications.each do |appl| %>
+    <% if appl.status == 'In progress' %>
+      <div class="application">
+        <h1>
+          <a class="appl_text", href="/applications/<%= appl.id %>"><%= appl.name %> <%= appl.id %></a>
+        </h1>
+      </div>
+    <% end %>
+  <% end %>
+</div>

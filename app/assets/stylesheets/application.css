@@ -13,3 +13,56 @@
  *= require_tree .
  *= require_self
  */
+
+.admin_application{
+  background-color: red;
+  text-transform: uppercase;
+  padding-bottom:10px;
+  padding-top:10px;
+  margin-top: 50px;
+  filter: drop-shadow(15px 15px 4px yellow);
+  text-align: center;
+  font-style: italic;
+}
+.application{
+  background-color: yellow;
+  text-transform: uppercase;
+  padding-bottom:10px;
+  padding-top:10px;
+  margin-top: 50px;
+  filter: drop-shadow(15px 15px 4px red);
+  text-align: center;
+  font-style: italic;
+}
+
+.appl_text{
+  color: blue;
+  filter: drop-shadow(5px 5px 4px #ffffff);
+}
+.application_container{
+  max-width: 50%;
+  padding-top:auto;
+  padding-bottom:auto;
+  position: relative;
+  margin: auto;
+}
+
+.appl_information{
+  text-align: center;
+  filter: drop-shadow(5px 5px 4px grey);
+}
+
+.appl_submission{
+  text-align: center;
+  filter: drop-shadow(30px 30px 70px yellow);
+}
+
+.appl_pets{
+  text-align: center;
+  filter: drop-shadow(30px 30px 40px red);
+}
+
+.appl_status{
+  text-align: center;
+  filter: drop-shadow(30px 30px 40px blue);
+}

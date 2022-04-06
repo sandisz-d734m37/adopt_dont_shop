@@ -23,8 +23,9 @@ class Shelter < ApplicationRecord
   end
 
   def self.shelter_pending
-    shels = joins(:applications)
-    shels.where("applications.status = 'Pending'").order(:name)
+    select("shelters.*")
+    .joins(:applications)
+    .where("applications.status = 'Pending'").order(:name)
   end
 
   def pet_count
@@ -55,11 +56,4 @@ class Shelter < ApplicationRecord
     adopted = pets.where(adoptable: false)
     adopted.count
   end
-
-  # def self.find_pending_applications(shelter_id)
-  #    select('pets.*, applications.id, shelters.id')
-  #    .joins(:pets, :applications)
-  #    .where("shelters.id = #{shelter_id} AND applications.status != 'Approved' AND applications.status != 'Rejected'")
-  # end
-
 end
