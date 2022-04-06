@@ -19,11 +19,17 @@
 
       <%= render "/applications/pet_search_bar" %>
 
+      <br/>
       <% if @pet.present? %>
-        <%= @pet.name %>
-        <%= button_to "Adopt this Pet", "/pet_applications/new", method: :post, params: {:application_id => @application.id, :pet_id => @pet.id} %>
+        <% @pet.each do |pet| %>
+          <%= pet.name %>
+          <%= button_to "Adopt this Pet", "/pet_applications/new", method: :post, params: {:application_id => @application.id, :pet_id => pet.id} %>
+          <br/>
+        <% end %>
+      <% else %>
+        Nothing matches <%= params[:pet_name] %>
+        <br/>
       <% end %>
-       <br/>
     <% end %>
 
     <% if @selected_pets.length > 0 && @application.description == "Awaiting information" %>

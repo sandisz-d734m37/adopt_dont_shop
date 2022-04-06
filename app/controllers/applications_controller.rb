@@ -23,7 +23,7 @@ class ApplicationsController < ApplicationController
   def show
     if params[:pet_name].present?
       @application = Application.find(params[:id])
-      @pet = Pet.search_by_name(params[:pet_name])
+      @pet = Pet.search(params[:pet_name])
     else
       @application = Application.find(params[:id])
     end
